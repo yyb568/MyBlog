@@ -5,7 +5,7 @@
 <title>尹义斌 · Blog</title>
 <meta charset="utf-8" /> 
 <meta property="og:site_name" content="尹义斌个人主页" />
-<link rel="stylesheet" href="<?=static_url("css")?>style.min.css" type="text/css" />
+<link rel="stylesheet" href="http://v6.res.dandyweng.com/style.min.css" type="text/css" />
 <script src="<?=static_url("js")?>jquery-1.9.1.min.js"></script>
 <script src="<?=static_url("js")?>skel.min.js"></script>
 <style>
@@ -83,8 +83,13 @@ footer a.icp {
     <!-- Header -->
     
     <header class="header">
+        <nav class="top clearfix">
+            <a href="javascript:;" data-action="switch-fullscreen-mode"><span><i class="icon-expand"></i> 全屏浏览</span></a>
+            <span class="right"><a href="javascript:;" data-action="switch-language"><span><i class="icon-earth"></i> View in English</span></a></span>
+        </nav>
+    
         <div class="header-background">
-            <img src="<?=static_url("img")?>header-background.jpg"/>
+            <img id="back-sticker" src="http://v6.res.dandyweng.com/images/my-back.png" alt="我的背影" />
         </div>
         
         <div class="title">
@@ -92,7 +97,7 @@ footer a.icp {
             <p class="subline">欢迎走进我的世界</p>
         </div>
         
-        <button class="trigger"></button>
+        <button class="trigger" data-info="点此开始"><span>Trigger</span></button>
     </header>
 
     <!-- Intro -->
