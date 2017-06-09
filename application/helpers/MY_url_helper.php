@@ -100,13 +100,13 @@ function static_url($type = 'images') {
 	}
 	if ($type == 'javascript') {
 		$type = 'js';
-		$staticurl = '/'.'static/'.$type.'/';
+		$staticurl = 'MyBlog/'.'static/'.$type.'/';
 	}elseif ($type == "other"){
-		$staticurl ='/'.'static/';
+		$staticurl ='MyBlog/'.'static/';
 	}elseif ($type == 'uploads'){
-		$staticurl = '/'."uploads/";
+		$staticurl = 'MyBlog/'."uploads/";
 	}else{
-		$staticurl = '/'.'static/'.$type.'/';
+		$staticurl = 'MyBlog/'.'static/'.$type.'/';
 	}
 	
 	return $staticurl;
