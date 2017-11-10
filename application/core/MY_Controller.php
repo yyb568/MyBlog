@@ -10,10 +10,10 @@ if (ENVIRONMENT != 'product'){
 }
 include_once "wxBizMsgCrypt.php";
 define('token','yinyibin');
-define('timeStamp','yinyibin');
-define('nonce','yinyibin');
-define('appId','yinyibin');
-define('text','yinyibin');
+define('timeStamp','1510328504');
+define('nonce','sdaf423sain');
+define('appId','wx7a01285bc391466a');
+define('text','<xml><ToUserName><![CDATA[oia2Tj我是中文jewbmiOUlr6X-1crbLOvLw]]></ToUserName><FromUserName><![CDATA[gh_7f083739789a]]></FromUserName><CreateTime>1407743423</CreateTime><MsgType><![CDATA[video]]></MsgType><Video><MediaId><![CDATA[eYJ1MbwPRJtOvIEabaxHs7TX2D-HV71s79GUxqdUkjm6Gs2Ed1KF3ulAOA9H1xG0]]></MediaId><Title><![CDATA[testCallBackReplyVideo]]></Title><Description><![CDATA[testCallBackReplyVideo]]></Description></Video></xml>');
 define('encodingAesKey','fYPvWtvbggLtKqeMUtDSZnuHYY9IIdA1eFeyvvbGLkg');
 class MY_Controller extends CI_Controller{
 	// protected $APPSECRET = '02211677d75de2aae108644b815d8761';
