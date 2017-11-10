@@ -15,13 +15,13 @@ class Home extends MY_Controller {
 	 */
 	public function __construct(){
 		parent::__construct();
-		$wxConfig = $this->getWxJsConfig();
+		// $wxConfig = $this->getWxJsConfig();
 	}
 	
 
 	public function index(){
 		//初次接入验证
-		// $this->valid();
+		$this->valid();
 		// $this->load->view('home/index');
 	}
 
