@@ -8,9 +8,9 @@
 if (ENVIRONMENT != 'product'){
 	ini_set('memory_limit', '256M');
 }
-include_once "wxBizMsgCrypt.php";
-class MY_Controller extends CI_Controller{
 
+class MY_Controller extends CI_Controller{
+include_once "wxBizMsgCrypt.php";
 	// protected $APPSECRET = '02211677d75de2aae108644b815d8761';
 	// 第三方发送消息给公众平台
 	protected $encodingAesKey = "fYPvWtvbggLtKqeMUtDSZnuHYY9IIdA1eFeyvvbGLkg";
