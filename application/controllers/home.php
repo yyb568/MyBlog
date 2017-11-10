@@ -5,7 +5,7 @@
  * add by yyb5683@gmail.com
  * 2017年6月12日16:31:04
  */
-define('TOKEN','yinyibin');
+// define('TOKEN','yinyibin');
 class Home extends MY_Controller {
 
 	/**
@@ -15,7 +15,7 @@ class Home extends MY_Controller {
 	 */
 	public function __construct(){
 		parent::__construct();
-		$wxConfig = $this->getWxJsConfig();
+		$wxConfig = $this->getWeXinState();
 	}
 	
 
@@ -30,15 +30,15 @@ class Home extends MY_Controller {
 	 * add by  yyb5683@gmail.com
 	 * 2017年6月14日09:13:51
 	 */
-	public function valid(){
-		$echoStr = $_GET["echostr"];
+	// public function valid(){
+	// 	$echoStr = $_GET["echostr"];
 	
-		//valid signature , option
-		if($this->checkSignature()){
-			echo $echoStr;
-			exit;
-		}
-	}
+	// 	//valid signature , option
+	// 	if($this->checkSignature()){
+	// 		echo $echoStr;
+	// 		exit;
+	// 	}
+	// }
 
 
 	/**
@@ -46,22 +46,22 @@ class Home extends MY_Controller {
 	 * add by  yyb5683@gmail.com
 	 * 2017年6月14日09:13:51
 	 */
-	private function checkSignature(){
-		$signature = $_GET["signature"];
-		$timestamp = $_GET["timestamp"];
-		$nonce = $_GET["nonce"];
+	// private function checkSignature(){
+	// 	$signature = $_GET["signature"];
+	// 	$timestamp = $_GET["timestamp"];
+	// 	$nonce = $_GET["nonce"];
 	
-		$token = TOKEN;
-		$tmpArr = array($token, $timestamp, $nonce);
-		sort($tmpArr);
-		$tmpStr = implode( $tmpArr );
-		$tmpStr = sha1( $tmpStr );
+	// 	$token = TOKEN;
+	// 	$tmpArr = array($token, $timestamp, $nonce);
+	// 	sort($tmpArr);
+	// 	$tmpStr = implode( $tmpArr );
+	// 	$tmpStr = sha1( $tmpStr );
 	
-		if( $tmpStr == $signature ){
-			return true;
-		}else{
-			return false;
-		}
-	}
+	// 	if( $tmpStr == $signature ){
+	// 		return true;
+	// 	}else{
+	// 		return false;
+	// 	}
+	// }
 }
 
