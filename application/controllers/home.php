@@ -1,27 +1,66 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/**
+ * 首页
+ * add by yyb5683@gmail.com
+ * 2017年6月12日16:31:04
+ */
+define('TOKEN','yinyibin');
 class Home extends MY_Controller {
 
 	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
+	 * 初始化
+	 * add by yyb5683@gmail.com
+	 * 2017年6月12日16:32:00
 	 */
-	public function index()
-	{
-		$this->load->view('home/index');
+	public function __construct(){
+		parent::__construct();
+	}
+	
+
+	public function index(){
+		//初次接入验证
+		$this->valid();
+		// $this->load->view('home/index');
+	}
+
+		/**
+	 * 首次接入验证
+	 * add by  yyb5683@gmail.com
+	 * 2017年6月14日09:13:51
+	 */
+	public function valid(){
+		$echoStr = $_GET["echostr"];
+	
+		//valid signature , option
+		if($this->checkSignature()){
+			echo $echoStr;
+			exit;
+		}
+	}
+
+
+	/**
+	 * 首次接入验证
+	 * add by  yyb5683@gmail.com
+	 * 2017年6月14日09:13:51
+	 */
+	private function checkSignature(){
+		$signature = $_GET["signature"];
+		$timestamp = $_GET["timestamp"];
+		$nonce = $_GET["nonce"];
+	
+		$token = TOKEN;
+		$tmpArr = array($token, $timestamp, $nonce);
+		sort($tmpArr);
+		$tmpStr = implode( $tmpArr );
+		$tmpStr = sha1( $tmpStr );
+	
+		if( $tmpStr == $signature ){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
