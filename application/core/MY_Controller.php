@@ -13,7 +13,7 @@ class MY_Controller extends CI_Controller{
 
 	// protected $APPSECRET = '02211677d75de2aae108644b815d8761';
 	// 第三方发送消息给公众平台
-	protected $encodingAesKey = "YPvWtvbggLtKqeMUtDSZnuHYY9IIdA1eFeyvvbGLkg";
+	protected $encodingAesKey = "fYPvWtvbggLtKqeMUtDSZnuHYY9IIdA1eFeyvvbGLkg";
 	protected $token = "yinyibin";
 	protected $timeStamp = time();
 	protected $nonce = "fhe080df9df4df";
