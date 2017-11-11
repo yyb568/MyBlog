@@ -27,7 +27,7 @@ class Home extends MY_Controller {
 	    	$this->valid();
 		}
 	}
-
+	//初次介入
 	public function valid()
     {
         $echoStr = $_GET["echostr"];
@@ -77,44 +77,13 @@ class Home extends MY_Controller {
             exit;
         }
     }
-    //     public function responseMsg()
-    // {
-    //     $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-
-    //     if (!empty($postStr)){
-    //         $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-    //         $fromUsername = $postObj->FromUserName;
-    //         $toUsername = $postObj->ToUserName;
-    //         $keyword = trim($postObj->Content);
-    //         $time = time();
-    //         $textTpl = "<xml>
-    //                     <ToUserName><![CDATA[%s]]></ToUserName>
-    //                     <FromUserName><![CDATA[%s]]></FromUserName>
-    //                     <CreateTime>%s</CreateTime>
-    //                     <MsgType><![CDATA[%s]]></MsgType>
-    //                     <Content><![CDATA[%s]]></Content>
-    //                     <FuncFlag>0</FuncFlag>
-    //                     </xml>";
-    //         if($keyword == "?" || $keyword == "？")
-    //         {
-    //             $msgType = "text";
-    //             $contentStr = date("Y-m-d H:i:s",time());
-    //             $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-    //             echo $resultStr;
-    //         }
-    //     }else{
-    //         echo "";
-    //         exit;
-    //     }
-    // }
-    
     private function receiveEvent($object)
     {
         $content = "";
         switch ($object->Event)
         {
             case "subscribe":
-                $content = "欢迎关注方倍工作室";
+                $content = "欢迎关注尹义斌的公共账号";
                 break;
             case "unsubscribe":
                 $content = "取消关注";
@@ -128,7 +97,7 @@ class Home extends MY_Controller {
     private function receiveText($object)
     {
         $keyword = trim($object->Content);
-        $content = date("Y-m-d H:i:s",time())."\n技术支持 方倍工作室";
+        $content = date("Y-m-d H:i:s",time())."\n技术支持 尹义斌";
         
         if(is_array($content)){
             if (isset($content[0]['PicUrl'])){
@@ -210,71 +179,5 @@ $item_str
         $result = sprintf($textTpl, $object->FromUserName, $object->ToUserName, time());
         return $result;
     }
-    
-    // private function logger($log_content)
-    // {
-    //     if(isset($_SERVER['HTTP_APPNAME'])){   //SAE
-    //         sae_set_display_errors(false);
-    //         sae_debug($log_content);
-    //         sae_set_display_errors(true);
-    //     }else if($_SERVER['REMOTE_ADDR'] != "127.0.0.1"){ //LOCAL
-    //         $max_size = 10000;
-    //         $log_filename = "log.xml";
-    //         if(file_exists($log_filename) and (abs(filesize($log_filename)) > $max_size)){unlink($log_filename);}
-    //         file_put_contents($log_filename, date('H:i:s')." ".$log_content."\r\n", FILE_APPEND);
-    //     }
-    // }
-
-	// public function index(){
-		
-	// 	// $this->valid();
-	// 	// $this->load->view('home/index');
-
-	// 	if (!isset($_GET['echostr'])) {
-	// 		$this->responseMsg();
-	// 	}else{
-	// 		//初次接入验证
- //    		$this->valid();
-	// 	}
-	// }
-
-	/**
-	 * 首次接入验证
-	 * add by  yyb5683@gmail.com
-	 * 2017年6月14日09:13:51
-	 */
-	// public function valid(){
-	// 	$echoStr = $_GET["echostr"];
-	
-	// 	//valid signature , option
-	// 	if($this->checkSignature()){
-	// 		echo $echoStr;
-	// 		exit;
-	// 	}
-	// }
-
-
-	/**
-	 * 首次接入验证
-	 * add by  yyb5683@gmail.com
-	 * 2017年6月14日09:13:51
-	 */
-	// private function checkSignature(){
-	// 	$signature = $_GET["signature"];
-	// 	$timestamp = $_GET["timestamp"];
-	// 	$nonce = $_GET["nonce"];
-	
-	// 	$token = TOKEN;
-	// 	$tmpArr = array($token, $timestamp, $nonce);
-	// 	sort($tmpArr);
-	// 	$tmpStr = implode( $tmpArr );
-	// 	$tmpStr = sha1( $tmpStr );
-	
-	// 	if( $tmpStr == $signature ){
-	// 		return true;
-	// 	}else{
-	// 		return false;
-	// 	}
-	// }
 }
 
