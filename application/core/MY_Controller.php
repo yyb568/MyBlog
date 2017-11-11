@@ -89,9 +89,8 @@ class MY_Controller extends CI_Controller{
         $keyword = trim($object->Content);
         // $content = date("Y-m-d H:i:s",time())."\n技术支持 尹义斌";
         $URL = "http://api.taokezhushou.com/api/v1/search?app_key=7c7b0a07f0973598&q=".$keyword;
-        $content = $this->getCurl($URL);
-        print_r($content);die;
-        // $content = 
+        $contents = $this->getCurl($URL);
+        $content = $contents['data'][0]['goods_title'];
         if(is_array($content)){
             if (isset($content[0]['PicUrl'])){
                 $result = $this->transmitNews($object, $content);
