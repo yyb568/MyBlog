@@ -106,70 +106,75 @@ class MY_Controller extends CI_Controller{
     }
 
     
-    private function transmitText($object, $content){
+    private function transmitText($object, $content)
+    {
         $textTpl = "<xml>
-				<ToUserName><![CDATA[%s]]></ToUserName>
-				<FromUserName><![CDATA[%s]]></FromUserName>
-				<CreateTime>%s</CreateTime>
-				<MsgType><![CDATA[text]]></MsgType>
-				<Content><![CDATA[%s]]></Content>
-				</xml>";
+<ToUserName><![CDATA[%s]]></ToUserName>
+<FromUserName><![CDATA[%s]]></FromUserName>
+<CreateTime>%s</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[%s]]></Content>
+</xml>";
         $result = sprintf($textTpl, $object->FromUserName, $object->ToUserName, time(), $content);
         return $result;
     }
 
-    private function transmitNews($object, $arr_item){
+    private function transmitNews($object, $arr_item)
+    {
         if(!is_array($arr_item))
             return;
 
-        $itemTpl = "<item>
-		        <Title><![CDATA[%s]]></Title>
-		        <Description><![CDATA[%s]]></Description>
-		        <PicUrl><![CDATA[%s]]></PicUrl>
-		        <Url><![CDATA[%s]]></Url>
-    			</item>";
+        $itemTpl = "    <item>
+        <Title><![CDATA[%s]]></Title>
+        <Description><![CDATA[%s]]></Description>
+        <PicUrl><![CDATA[%s]]></PicUrl>
+        <Url><![CDATA[%s]]></Url>
+    </item>
+";
         $item_str = "";
         foreach ($arr_item as $item)
             $item_str .= sprintf($itemTpl, $item['Title'], $item['Description'], $item['PicUrl'], $item['Url']);
 
         $newsTpl = "<xml>
-				<ToUserName><![CDATA[%s]]></ToUserName>
-				<FromUserName><![CDATA[%s]]></FromUserName>
-				<CreateTime>%s</CreateTime>
-				<MsgType><![CDATA[news]]></MsgType>
-				<Content><![CDATA[]]></Content>
-				<ArticleCount>%s</ArticleCount>
-				<Articles>
-				$item_str</Articles>
-				</xml>";
+<ToUserName><![CDATA[%s]]></ToUserName>
+<FromUserName><![CDATA[%s]]></FromUserName>
+<CreateTime>%s</CreateTime>
+<MsgType><![CDATA[news]]></MsgType>
+<Content><![CDATA[]]></Content>
+<ArticleCount>%s</ArticleCount>
+<Articles>
+$item_str</Articles>
+</xml>";
 
         $result = sprintf($newsTpl, $object->FromUserName, $object->ToUserName, time(), count($arr_item));
         return $result;
     }
 
-    private function transmitMusic($object, $musicArray){
+    private function transmitMusic($object, $musicArray)
+    {
         $itemTpl = "<Music>
-				    <Title><![CDATA[%s]]></Title>
-				    <Description><![CDATA[%s]]></Description>
-				    <MusicUrl><![CDATA[%s]]></MusicUrl>
-				    <HQMusicUrl><![CDATA[%s]]></HQMusicUrl>
-				   </Music>";
+    <Title><![CDATA[%s]]></Title>
+    <Description><![CDATA[%s]]></Description>
+    <MusicUrl><![CDATA[%s]]></MusicUrl>
+    <HQMusicUrl><![CDATA[%s]]></HQMusicUrl>
+</Music>";
 
         $item_str = sprintf($itemTpl, $musicArray['Title'], $musicArray['Description'], $musicArray['MusicUrl'], $musicArray['HQMusicUrl']);
 
         $textTpl = "<xml>
-				<ToUserName><![CDATA[%s]]></ToUserName>
-				<FromUserName><![CDATA[%s]]></FromUserName>
-				<CreateTime>%s</CreateTime>
-				<MsgType><![CDATA[music]]></MsgType>
-				$item_str
-				</xml>";
+<ToUserName><![CDATA[%s]]></ToUserName>
+<FromUserName><![CDATA[%s]]></FromUserName>
+<CreateTime>%s</CreateTime>
+<MsgType><![CDATA[music]]></MsgType>
+$item_str
+</xml>";
 
         $result = sprintf($textTpl, $object->FromUserName, $object->ToUserName, time());
         return $result;
     }
     
-    private function logger($log_content){
+    private function logger($log_content)
+    {
         if(isset($_SERVER['HTTP_APPNAME'])){   //SAE
             sae_set_display_errors(false);
             sae_debug($log_content);
