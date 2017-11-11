@@ -91,9 +91,9 @@ class MY_Controller extends CI_Controller{
         
         if(is_array($content)){
             if (isset($content[0]['PicUrl'])){
-                $result = $this->transmitNews($object, $content);
+                $result = $this->transmitNews($object, '2');
             }else if (isset($content['MusicUrl'])){
-                $result = $this->transmitMusic($object, $content);
+                $result = $this->transmitMusic($object, '1');
             }
         }else{
             $result = $this->transmitText($object, $content);
