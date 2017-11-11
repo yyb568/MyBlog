@@ -59,7 +59,6 @@ class Home extends MY_Controller {
     {
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
         if (!empty($postStr)){
-            $this->logger("R ".$postStr);
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
             $RX_TYPE = trim($postObj->MsgType);
 
@@ -72,7 +71,6 @@ class Home extends MY_Controller {
                     $result = $this->receiveText($postObj);
                     break;
             }
-            $this->logger("T ".$result);
             echo $result;
         }else {
             echo "";
@@ -213,19 +211,19 @@ $item_str
         return $result;
     }
     
-    private function logger($log_content)
-    {
-        if(isset($_SERVER['HTTP_APPNAME'])){   //SAE
-            sae_set_display_errors(false);
-            sae_debug($log_content);
-            sae_set_display_errors(true);
-        }else if($_SERVER['REMOTE_ADDR'] != "127.0.0.1"){ //LOCAL
-            $max_size = 10000;
-            $log_filename = "log.xml";
-            if(file_exists($log_filename) and (abs(filesize($log_filename)) > $max_size)){unlink($log_filename);}
-            file_put_contents($log_filename, date('H:i:s')." ".$log_content."\r\n", FILE_APPEND);
-        }
-    }
+    // private function logger($log_content)
+    // {
+    //     if(isset($_SERVER['HTTP_APPNAME'])){   //SAE
+    //         sae_set_display_errors(false);
+    //         sae_debug($log_content);
+    //         sae_set_display_errors(true);
+    //     }else if($_SERVER['REMOTE_ADDR'] != "127.0.0.1"){ //LOCAL
+    //         $max_size = 10000;
+    //         $log_filename = "log.xml";
+    //         if(file_exists($log_filename) and (abs(filesize($log_filename)) > $max_size)){unlink($log_filename);}
+    //         file_put_contents($log_filename, date('H:i:s')." ".$log_content."\r\n", FILE_APPEND);
+    //     }
+    // }
 
 	// public function index(){
 		
