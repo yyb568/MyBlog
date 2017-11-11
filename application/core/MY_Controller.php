@@ -88,6 +88,8 @@ class MY_Controller extends CI_Controller{
     private function receiveText($object){
         $keyword = trim($object->Content);
         // $content = date("Y-m-d H:i:s",time())."\n技术支持 尹义斌";
+        $URL = "http://api.taokezhushou.com/api/v1/search?app_key=7c7b0a07f0973598&q=".$keyword;
+        $content = $this->getCurl($URL);
         // $content = 
         if(is_array($content)){
             if (isset($content[0]['PicUrl'])){
@@ -96,7 +98,7 @@ class MY_Controller extends CI_Controller{
                 $result = $this->transmitMusic($object, $content);
             }
         }else{
-            $result = $this->transmitText($object, $keyword);
+            $result = $this->transmitText($object, $content);
         }
 
         return $result;
@@ -178,5 +180,24 @@ class MY_Controller extends CI_Controller{
             file_put_contents($log_filename, date('H:i:s')." ".$log_content."\r\n", FILE_APPEND);
         }
     }
-	
+
+
+    private function getCurl($urls = ''){
+    	// 1. 初始化
+		$ch = curl_init();
+		// 2. 设置选项，包括URL
+		curl_setopt($ch,CURLOPT_URL,$urls);
+		curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+		curl_setopt($ch,CURLOPT_HEADER,0);
+		// 3. 执行并获取HTML文档内容
+		$output = curl_exec($ch);
+		if($output === FALSE ){
+		echo "CURL Error:".curl_error($ch);
+		}
+		
+		// 4. 释放curl句柄
+		curl_close($ch);
+
+		print_r(json_decode($output,true));
+    }
 }
