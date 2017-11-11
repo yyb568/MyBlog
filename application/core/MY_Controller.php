@@ -87,16 +87,16 @@ class MY_Controller extends CI_Controller{
     //接收文本消息
     private function receiveText($object){
         $keyword = trim($object->Content);
-        $content = date("Y-m-d H:i:s",time())."\n技术支持 尹义斌";
-        
+        // $content = date("Y-m-d H:i:s",time())."\n技术支持 尹义斌";
+        // $content = 
         if(is_array($content)){
             if (isset($content[0]['PicUrl'])){
-                $result = $this->transmitNews($object, '2');
+                $result = $this->transmitNews($object, $content);
             }else if (isset($content['MusicUrl'])){
-                $result = $this->transmitMusic($object, '1');
+                $result = $this->transmitMusic($object, $content);
             }
         }else{
-            $result = $this->transmitText($object, '3');
+            $result = $this->transmitText($object, $keyword);
         }
 
         return $result;
