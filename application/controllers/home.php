@@ -55,26 +55,56 @@ class Home extends MY_Controller {
         }
     }
 
-    public function responseMsg()
+    // public function responseMsg()
+    // {
+    //     $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+    //     if (!empty($postStr)){
+    //         $this->logger("R ".$postStr);
+    //         $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+    //         $RX_TYPE = trim($postObj->MsgType);
+
+    //         switch ($RX_TYPE)
+    //         {
+    //             case "event":
+    //                 $result = $this->receiveEvent($postObj);
+    //                 break;
+    //             case "text":
+    //                 $result = $this->receiveText($postObj);
+    //                 break;
+    //         }
+    //         $this->logger("T ".$result);
+    //         echo $result;
+    //     }else {
+    //         echo "";
+    //         exit;
+    //     }
+    // }
+        public function responseMsg()
     {
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-        if (!empty($postStr)){
-            $this->logger("R ".$postStr);
-            $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-            $RX_TYPE = trim($postObj->MsgType);
 
-            switch ($RX_TYPE)
+        if (!empty($postStr)){
+            $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+            $fromUsername = $postObj->FromUserName;
+            $toUsername = $postObj->ToUserName;
+            $keyword = trim($postObj->Content);
+            $time = time();
+            $textTpl = "<xml>
+                        <ToUserName><![CDATA[%s]]></ToUserName>
+                        <FromUserName><![CDATA[%s]]></FromUserName>
+                        <CreateTime>%s</CreateTime>
+                        <MsgType><![CDATA[%s]]></MsgType>
+                        <Content><![CDATA[%s]]></Content>
+                        <FuncFlag>0</FuncFlag>
+                        </xml>";
+            if($keyword == "?" || $keyword == "？")
             {
-                case "event":
-                    $result = $this->receiveEvent($postObj);
-                    break;
-                case "text":
-                    $result = $this->receiveText($postObj);
-                    break;
+                $msgType = "text";
+                $contentStr = date("Y-m-d H:i:s",time());
+                $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+                echo $resultStr;
             }
-            $this->logger("T ".$result);
-            echo $result;
-        }else {
+        }else{
             echo "";
             exit;
         }
