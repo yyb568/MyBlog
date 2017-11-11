@@ -74,7 +74,7 @@ class MY_Controller extends CI_Controller{
         switch ($object->Event)
         {
             case "subscribe":
-                $content = "欢迎关注方倍工作室";
+                $content = "欢迎尹义斌的微信公众账号";
                 break;
             case "unsubscribe":
                 $content = "取消关注";
