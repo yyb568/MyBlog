@@ -87,7 +87,7 @@ class MY_Controller extends CI_Controller{
     //接收文本消息
     private function receiveText($object){
         $keyword = trim($object->Content);
-        $content = date("Y-m-d H:i:s",time())."\n技术支持 方倍工作室";
+        $content = date("Y-m-d H:i:s",time())."\n技术支持 尹义斌";
         
         if(is_array($content)){
             if (isset($content[0]['PicUrl'])){
