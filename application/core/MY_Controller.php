@@ -96,7 +96,7 @@ class MY_Controller extends CI_Controller{
                 $result = $this->transmitMusic($object, '1');
             }
         }else{
-            $result = $this->transmitText($object, $content);
+            $result = $this->transmitText($object, '3');
         }
 
         return $result;
