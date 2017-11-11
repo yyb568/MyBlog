@@ -7,12 +7,6 @@
  */
 header('Content-type:text');
 define("TOKEN", "yinyibin");
-$wechatObj = new home();
-if (!isset($_GET['echostr'])) {
-	$wechatObj->responseMsg();
-}else{
-    $wechatObj->valid();
-}
 class Home extends MY_Controller {
 
 	/**
@@ -25,8 +19,16 @@ class Home extends MY_Controller {
 		// $wxConfig = $this->getWxJsConfig();
 	}
 	
+	public function index(){
 
-	    public function valid()
+		if (!isset($_GET['echostr'])) {
+			$this->responseMsg();
+		}else{
+	    	$this->valid();
+		}
+	}
+
+	public function valid()
     {
         $echoStr = $_GET["echostr"];
         if($this->checkSignature()){
