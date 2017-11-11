@@ -90,6 +90,7 @@ class MY_Controller extends CI_Controller{
         // $content = date("Y-m-d H:i:s",time())."\n技术支持 尹义斌";
         $URL = "http://api.taokezhushou.com/api/v1/search?app_key=7c7b0a07f0973598&q=".$keyword;
         $content = $this->getCurl($URL);
+        print_r($content);die;
         // $content = 
         if(is_array($content)){
             if (isset($content[0]['PicUrl'])){
