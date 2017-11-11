@@ -91,6 +91,7 @@ class MY_Controller extends CI_Controller{
         $URL = "http://api.taokezhushou.com/api/v1/search?app_key=7c7b0a07f0973598&q=".$keyword;
         $contents = $this->getCurl($URL);
         $content = $contents['data'][0]['goods_title'];
+        print_r($content);die;
         if(is_array($content)){
             if (isset($content[0]['PicUrl'])){
                 $result = $this->transmitNews($object, $content);
